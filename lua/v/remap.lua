@@ -18,6 +18,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       { "]d",         vim.diagnostic.goto_next,     desc = "Next diagnostic" },
       { "[d",         vim.diagnostic.goto_prev,     desc = "Prev diagnostic" },
 
+
       -- <leader>l group
       { "<leader>l",  group = "LSP" },
       { "<leader>la", vim.lsp.buf.code_action,      desc = "Code action" },
@@ -44,7 +45,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 wk.add({
   -- leader group
-  { "<leader>e",  function() vim.cmd.Ex() end,                              desc = "Open file explorer" },
+  { "<leader>e",  "<cmd>Neotree toggle<CR>",                                desc = "Toggle Neotree" },
   { "<leader>p",  "\"_dP",                                                  desc = "Paste without overwrite" },
   { "<leader>/",  "<Plug>(comment_toggle_linewise_current)",                desc = "Toggle comment",                    remap = true },
   { "<leader>s",  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],   desc = "Search & replace word under cursor" },
@@ -56,6 +57,7 @@ wk.add({
   { "n",          "nzzzv",                                                  desc = "Next search result & center" },
   { "N",          "Nzzzv",                                                  desc = "Prev search result & center" },
   { "Q",          "<nop>",                                                  desc = "Disable Ex mode" },
+
 
   -- Telescope group + mappings
   { "<leader>f",  group = "Find" },
