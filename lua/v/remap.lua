@@ -45,26 +45,26 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 wk.add({
   -- leader group
-  { "<leader>e",  "<cmd>Neotree toggle<CR>",                                desc = "Toggle Neotree" },
-  { "<leader>p",  "\"_dP",                                                  desc = "Paste without overwrite" },
-  { "<leader>/",  "<Plug>(comment_toggle_linewise_current)",                desc = "Toggle comment",                    remap = true },
-  { "<leader>s",  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],   desc = "Search & replace word under cursor" },
+  { "<leader>e",        "<cmd>Neotree toggle<CR>",                                desc = "Toggle Neotree" },
+  { "<leader><leader>", "<cmd>Telescope cmdline<cr>",                             desc = "Command line" },
+  { "<leader>p",        "\"_dP",                                                  desc = "Paste without overwrite" },
+  { "<leader>/",        "<Plug>(comment_toggle_linewise_current)",                desc = "Toggle comment",                    remap = true },
+  { "<leader>s",        [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],   desc = "Search & replace word under cursor" },
 
   -- non-leader
-  { "J",          "mzJ`z",                                                  desc = "Join lines and keep cursor" },
-  { "<C-d>",      "<C-d>zz",                                                desc = "Half page down & center" },
-  { "<C-u>",      "<C-u>zz",                                                desc = "Half page up & center" },
-  { "n",          "nzzzv",                                                  desc = "Next search result & center" },
-  { "N",          "Nzzzv",                                                  desc = "Prev search result & center" },
-  { "Q",          "<nop>",                                                  desc = "Disable Ex mode" },
-
+  { "J",                "mzJ`z",                                                  desc = "Join lines and keep cursor" },
+  { "<C-d>",            "<C-d>zz",                                                desc = "Half page down & center" },
+  { "<C-u>",            "<C-u>zz",                                                desc = "Half page up & center" },
+  { "n",                "nzzzv",                                                  desc = "Next search result & center" },
+  { "N",                "Nzzzv",                                                  desc = "Prev search result & center" },
+  { "Q",                "<nop>",                                                  desc = "Disable Ex mode" },
 
   -- Telescope group + mappings
-  { "<leader>f",  group = "Find" },
-  { "<leader>ff", function() require("telescope.builtin").find_files() end, desc = "Find files" },
-  { "<leader>fg", function() require("telescope.builtin").git_files() end,  desc = "Find git files" },
-  { "<leader>fl", function() require("telescope.builtin").live_grep() end,  desc = "Live grep" },
+  { "<leader>f",        group = "Find" },
+  { "<leader>ff",       function() require("telescope.builtin").find_files() end, desc = "Find files" },
+  { "<leader>fg",       function() require("telescope.builtin").git_files() end,  desc = "Find git files" },
+  { "<leader>fl",       function() require("telescope.builtin").live_grep() end,  desc = "Live grep" },
 
   -- Symbols Outline
-  { "<leader>o",  "<cmd>SymbolsOutline<CR>",                                desc = "Toggle Symbols Outline" },
+  { "<leader>o",        "<cmd>SymbolsOutline<CR>",                                desc = "Toggle Symbols Outline" },
 }, { mode = "n" })
