@@ -56,7 +56,7 @@ return {
               }
             }
           })
-        end
+        end,
         verible = function()
           require('lspconfig').verible.setup({
             capabilities = capabilities,
@@ -65,7 +65,6 @@ return {
         end
       }
     })
-
     vim.api.nvim_create_autocmd("BufWritePost", {
       pattern = "*.v",
       callback = function()
