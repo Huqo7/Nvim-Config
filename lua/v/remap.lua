@@ -1,5 +1,28 @@
 local wk = require("which-key")
 
+vim.api.nvim_create_autocmd('TermOpen', {
+  pattern = 'term://*',
+  callback = function(ev)
+    local opts = { buffer = ev.buf, silent = true }
+    vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], vim.tbl_extend('force', opts, { desc = 'Exit terminal mode' }))
+    vim.keymap.set('t', 'jk', [[<C-\><C-n>]], vim.tbl_extend('force', opts, { desc = 'Exit terminal mode' }))
+    vim.keymap.set('t', '<A-h>', [[<C-\><C-n><C-w>h]], vim.tbl_extend('force', opts, { desc = 'Left window' }))
+    vim.keymap.set('t', '<A-j>', [[<C-\><C-n><C-w>j]], vim.tbl_extend('force', opts, { desc = 'Down window' }))
+    vim.keymap.set('t', '<A-k>', [[<C-\><C-n><C-w>k]], vim.tbl_extend('force', opts, { desc = 'Up window' }))
+    vim.keymap.set('t', '<A-l>', [[<C-\><C-n><C-w>l]], vim.tbl_extend('force', opts, { desc = 'Right window' }))
+  end,
+})
+
+vim.keymap.set('n', '<C-h>', [[<C-w>h]], { desc = 'Left window' })
+vim.keymap.set('n', '<C-j>', [[<C-w>j]], { desc = 'Down window' })
+vim.keymap.set('n', '<C-k>', [[<C-w>k]], { desc = 'Up window' })
+vim.keymap.set('n', '<C-l>', [[<C-w>l]], { desc = 'Right window' })
+
+vim.keymap.set('n', '<C-Left>', [[<C-w>h]], { desc = 'Left window' })
+vim.keymap.set('n', '<C-Down>', [[<C-w>j]], { desc = 'Down window' })
+vim.keymap.set('n', '<C-Up>', [[<C-w>k]], { desc = 'Up window' })
+vim.keymap.set('n', '<C-Right>', [[<C-w>l]], { desc = 'Right window' })
+
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("user_lsp_attach", { clear = true }),
   callback = function(event)
@@ -19,7 +42,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       { "[d",         vim.diagnostic.goto_prev,     desc = "Prev diagnostic" },
 
 
-      -- <leader>l group
+      -- < eader>l group
       { "<leader>l",  group = "LSP" },
       { "<leader>la", vim.lsp.buf.code_action,      desc = "Code action" },
       { "<leader>lr", vim.lsp.buf.references,       desc = "References" },
@@ -46,6 +69,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 wk.add({
   -- leader group
   { "<leader>e",        "<cmd>Neotree toggle<CR>",                                desc = "Toggle Neotree" },
+  { "<leader>q",        "<cmd>q<CR>",                                             desc = "Toggle Neotree" },
   { "<leader><leader>", "<cmd>Telescope cmdline<cr>",                             desc = "Command line" },
   { "<leader>p",        "\"_dP",                                                  desc = "Paste without overwrite" },
   { "<leader>/",        "<Plug>(comment_toggle_linewise_current)",                desc = "Toggle comment",                    remap = true },

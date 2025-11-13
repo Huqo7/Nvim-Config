@@ -29,7 +29,7 @@ return {
 
     require('mason-lspconfig').setup({
       ensure_installed = {
-        "lua_ls", "clangd"
+        "lua_ls", "clangd", "verible"
       },
       handlers = {
         function(server_name)
@@ -57,7 +57,20 @@ return {
             }
           })
         end
+        verible = function()
+          require('lspconfig').verible.setup({
+            capabilities = capabilities,
+            cmd = { 'verible-verilog-ls', '--rules_config_search' }
+          })
+        end
       }
+    })
+
+    vim.api.nvim_create_autocmd("BufWritePost", {
+      pattern = "*.v",
+      callback = function()
+        vim.lsp.buf.format({ async = false })
+      end,
     })
 
     local cmp = require('cmp')
@@ -74,11 +87,16 @@ return {
         { name = 'luasnip', keyword_length = 2 },
         { name = 'buffer',  keyword_length = 3 },
       },
+      completion = {
+        autocomplete = false,
+
+      },
       mapping = cmp.mapping.preset.insert({
         -- ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
         -- ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        -- ['<C-Space>'] = cmp.mapping.complete(),
+        ['<Tab>'] = cmp.mapping.confirm({ select = true }),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.abort(),
       }),
       snippet = {
         expand = function(args)
